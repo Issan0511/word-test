@@ -1,9 +1,10 @@
 // Global Variables
 let currentWords = [];
 let wrongWords = [];
-
+let canDownload = true;
 // この関数を新しく追加
 function startTest(wordList) {
+    canDownload = true;  //
     console.log(wordList)
     currentWords = wordList.map(item => ({word: item.word, answer: item.answer}));
     shuffleWords(); // 単語をシャッフル
@@ -63,8 +64,8 @@ function restart() {
 function showWord() {
     if (currentWords.length === 0) {
         if (wrongWords.length > 0) {
-            alert('単語テストが一通り終わりました。間違えた単語を再表示します');
-            exportToExcel(); // 間違った単語をExcelに出力
+
+            testCompleted();
             restart();  // 間違えた単語を再表示
         } else {
             alert('単語テストが終了しました。すべて正解です！');
@@ -74,7 +75,17 @@ function showWord() {
     // 以下、単語表示の通常の処理
     document.getElementById("wordDisplay").innerText = currentWords[0].word;
 }
-
+function testCompleted() {
+    if (canDownload) {
+        // 間違った単語リストをExcelでダウンロードする処理
+        exportToExcel();
+    
+        canDownload = false;  // フラグをfalseに設定
+    }
+    // メッセージ表示
+    alert('単語テストが一通り終わりました。間違えた単語を再表示します');
+    console.log(canDownload);
+}
 // 間違った単語をExcelシートに追加する関数
 function exportToExcel() {
     var new_workbook = XLSX.utils.book_new();
@@ -83,6 +94,7 @@ function exportToExcel() {
     
     // ここでExcelファイルとして出力
     XLSX.writeFile(new_workbook, 'WrongWords.xlsx');
+    console.log(canDownload);
 }
 
 // ボタンの表示を切り替える関数
