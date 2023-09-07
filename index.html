@@ -13,17 +13,19 @@
 
 <div id="wordDisplay">ここに単語が表示されます</div>
 <div id="answerDisplay">ここに答えが表示されます</div>
-<div id="answerButton">
-    <button onclick="showAnswer()">答えを見る</button>
-</div>
 
-<div id="decisionButtons" style="display: none;">
-    <button onclick="correct()">正解</button>
-    <button onclick="incorrect()">間違い</button>
-</div>
 
+<div id="buttonContainer">
+    <div id="decisionButtons" style="visibility: hidden;">
+        <button onclick="correct()">正解</button>
+        <button onclick="incorrect()">間違い</button>
+    </div>
+    <div id="answerButton">
+        <button onclick="showAnswer()">答えを見る</button>
+    </div>
+</div>
+<br>
 <input type="file" id="excelFileInput" />
-
 
 <script>
     // ここにJavaScriptのコード
