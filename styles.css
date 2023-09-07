@@ -1,3 +1,19 @@
 #wordDisplay {
-    font-size: 28px;
+    font-size: 84px;
+}
+body {
+    font-size: 300%; /* テキストを3倍に */
+}
+button {
+    font-size: 24px;  /* ボタン内のテキストサイズ */
+    padding: 15px;  /* ボタンの内側の余白 */
+}
+#buttonContainer {
+    position: relative;
+}
+
+#decisionButtons, #answerButton {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
