@@ -2,6 +2,11 @@
 let currentWords = [];
 let wrongWords = [];
 let canDownload = true;
+window.onload = function() {
+    document.getElementById('answerButton').style.visibility = 'visible';
+    document.getElementById('decisionButtons').style.visibility = 'hidden';
+};
+
 // この関数を新しく追加
 function startTest(wordList) {
     canDownload = true;  //
@@ -27,34 +32,20 @@ function showWord() {
     // 単語を画面に表示するロジック（仮）
     document.getElementById("wordDisplay").innerText = currentWords[0].word;
 }
-// 答えを表示する関数
-function showAnswer() {
-    document.getElementById("answerDisplay").innerText = currentWords[0].answer;
-
-    // 答えを見るボタンを非表示にし、正解・不正解ボタンを表示
-    document.getElementById('answerButton').style.display = "none";
-    document.getElementById('decisionButtons').style.display = "block";
-}
 // 正解ボタンが押されたとき
 function correct() {
-    currentWords.shift(); // 最初の要素を削除
-    document.getElementById("answerDisplay").innerText = ""; // 答えをクリア
-    showWord(); // 次の単語を表示
-    // ボタンの表示切り替え
-    document.getElementById('answerButton').style.display = "block";
-    document.getElementById('decisionButtons').style.display = "none";
+    toggleButtons(true);
+    currentWords.shift(); 
+    showWord(); 
 }
 
 // 間違いボタンが押されたとき
 function incorrect() {
-    wrongWords.push(currentWords.shift()); // 間違った単語をwrongWordsに追加
-    document.getElementById("answerDisplay").innerText = ""; // 答えをクリア
-    showWord(); // 次の単語を表示
-    // ボタンの表示切り替え
-    document.getElementById('answerButton').style.display = "block";
-    document.getElementById('decisionButtons').style.display = "none";
+    toggleButtons(true);
+    wrongWords.push(currentWords.shift());
+    showWord();
 }
-// 再度表示するボタンが押されたときの関数
+
 function restart() {
     currentWords = wrongWords.slice(); // 間違えた単語をコピー
     wrongWords = []; // 間違えた単語リストをリセット
@@ -72,9 +63,18 @@ function showWord() {
         }
         return;
     }
+    // 答えの部分を空白にする
+    document.getElementById("answerDisplay").innerText = "　";
     // 以下、単語表示の通常の処理
     document.getElementById("wordDisplay").innerText = currentWords[0].word;
+    
 }
+function showAnswer() {
+    document.getElementById("answerDisplay").innerText = currentWords[0].answer;
+    console.log(`aaa`)
+    toggleButtons()
+}
+
 function testCompleted() {
     if (canDownload) {
         // 間違った単語リストをExcelでダウンロードする処理
@@ -99,8 +99,18 @@ function exportToExcel() {
 
 // ボタンの表示を切り替える関数
 function toggleButtons() {
-    document.getElementById('answerButton').style.display = "block";
-    document.getElementById('decisionButtons').style.display = "none";
+    const answerButton = document.getElementById('answerButton');
+    const decisionButtons = document.getElementById('decisionButtons');
+    console.log(`a`)
+    if (answerButton.style.visibility === 'visible') {
+        answerButton.style.visibility = 'hidden';
+        decisionButtons.style.visibility = 'visible';
+        console.log(`aa`)
+    } else {
+        answerButton.style.visibility = 'visible';
+        decisionButtons.style.visibility = 'hidden';
+        console.log(`aaaa`)
+    }
 }
 
 
