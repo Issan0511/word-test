@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>単語リスト</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+
+</head>
+<body>
+
+<h1>単語リスト</h1>
+
+<div id="wordDisplay">ここに単語が表示されます</div>
+<div id="answerDisplay">ここに答えが表示されます</div>
+
+
+<div id="buttonContainer">
+    <div id="decisionButtons" style="visibility: hidden;">
+        <button onclick="correct()">正解</button>
+        <button onclick="incorrect()">間違い</button>
+    </div>
+    <div id="answerButton">
+        <button onclick="showAnswer()">答えを見る</button>
+    </div>
+</div>
+<br>
+<input type="file" id="excelFileInput" />
+
+<script>
+    // ここにJavaScriptのコード
+    document.getElementById('excelFileInput').addEventListener('change', function(e){
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(e.target.files[0]);
+
+        reader.onload = function(e) {
+            var data = new Uint8Array(reader.result);
+            var workbook = XLSX.read(data, {type: 'array'});
+
+            var sheetName = workbook.SheetNames[0];
+            var worksheet = workbook.Sheets[sheetName];
+
+            var wordList = XLSX.utils.sheet_to_json(worksheet);
+
+            startTest(wordList);
+        };
+    });
+
+
+</script>
+
+
+</body>
+</html>
