@@ -21,7 +21,7 @@ function startTest(wordList) {
     currentWords = wordList.map(item => ({word: item.word, answer: item.answer}));
     totalWords = currentWords.length; // 全体の単語数を設定
     currentIndex = 1; // 現在の単語のインデックスをリセットshuffleWords(); // 単語をシャッフル]
-    function shuffleWords();
+    function shuffleWords()
     showWord(); // 最初の単語を表示
 }
 
