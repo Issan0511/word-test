@@ -20,7 +20,8 @@ function startTest(wordList) {
     console.log(wordList)
     currentWords = wordList.map(item => ({word: item.word, answer: item.answer}));
     totalWords = currentWords.length; // 全体の単語数を設定
-    currentIndex = 1; // 現在の単語のインデックスをリセットshuffleWords(); // 単語をシャッフル
+    currentIndex = 1; // 現在の単語のインデックスをリセットshuffleWords(); // 単語をシャッフル]
+    function shuffleWords();
     showWord(); // 最初の単語を表示
 }
 
@@ -53,6 +54,8 @@ function restart() {
     savedWrongWords = wrongWords.slice(); // 内容を保存
     currentWords = wrongWords.slice(); // 間違えた単語をコピー
     wrongWords = []; // 間違えた単語リストをリセット
+    totalWords = currentWords.length; // 全体の単語数を設定
+    currentIndex = 1; // 現在の単語のインデックスをリセットshuffleWords(); // 単語をシャッフル
     showWord(); // 最初の単語を表示
 }
 
