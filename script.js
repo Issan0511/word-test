@@ -4,6 +4,7 @@ let wrongWords = [];
 let correctWords =[];
 let canDownload = true;
 let savedWrongWords = [];
+let savedcorrectWords=[];
 let previousWords = []; 
 let currentAnswer = [];
 let currentWord = [];
@@ -54,6 +55,7 @@ function restart() {
     savedWrongWords = wrongWords.slice(); // 内容を保存
     currentWords = wrongWords.slice(); // 間違えた単語をコピー
     wrongWords = []; // 間違えた単語リストをリセット
+    correctWords = [];
     totalWords = currentWords.length; // 全体の単語数を設定
     currentIndex = 1; // 現在の単語のインデックスをリセットshuffleWords(); // 単語をシャッフル
     showWord(); // 最初の単語を表示
