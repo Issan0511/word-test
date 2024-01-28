@@ -130,12 +130,15 @@ function showWord() {
     // 答えの部分を空白にする
     document.getElementById("answerDisplay").innerText =  currentIndex + "/" + totalWords;
     // 以下、単語表示の通常の処理
-       document.getElementById("wordDisplay").innerText =  currentWords[0].word  ;
-    
+       document.getElementById("wordDisplay").style.fontSize = "84px";
+       document.getElementById("wordDisplay").innerText =  currentWords[0].word;
+       document.getElementById("answerDisplay").style.fontSize = "50px";
 }
 function showAnswer() {
     document.getElementById("answerDisplay").innerText = currentWords[0].answer;
-    toggleButtons()
+    document.getElementById("wordDisplay").style.fontSize = "50px";
+    document.getElementById("answerDisplay").style.fontSize = "70px";
+    toggleButtons();
 }
 
 // 一つ前の単語に戻る関数
