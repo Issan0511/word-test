@@ -1,49 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Word Study</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>単語リスト</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+
 </head>
 <body>
-  <h1>Word Study</h1>
-      <!-- 新しいボタンを追加 -->
-      <div class="card" id="card">
-        <div class="container">
-            <div id="wordDisplay">　</div>
-            <div id="answerDisplay">ボタンを押す代わりにカードをタップできるよ</div>
-        </div>
-      </div>
-    
-    
-    <div id="buttonContainer">
-        <div id="decisionButtons" style="visibility: hidden;">
-            <button onclick="correct()">正解</button>
-            <button onclick="incorrect()">間違い</button>
-        </div>
-        <div id="answerButton">
-            <button onclick="showAnswer()">答えを見る</button>
-        </div>
+
+<h1>単語テスト</h1>
+
+<div class="card" id="card">
+    <div class="container">
+        <div id="wordDisplay">単語</div>
+        <div id="answerDisplay">答え</div>
     </div>
-    <br>
-    <input type="file" id="excelFileInput" multiple>
-    <br>
-    
+  </div>
+
+
+<div id="buttonContainer">
+    <div id="decisionButtons" style="visibility: hidden;">
+        <button onclick="correct()">正解</button>
+        <button onclick="incorrect()">間違い</button>
+    </div>
+    <div id="answerButton">
+        <button onclick="showAnswer()">答えを見る</button>
+    </div>
+</div>
+<br>
+<input type="file" id="excelFileInput" multiple />
+
 <button id="downloadButton" style="display:none;">間違えた単語のダウンロード</button>
 <button id="goBackButton">一つ前の正解</button>
 
+<script>
+    // Global Variables
 
-    <div id="showcardButton">
-      <button onclick="displayCards(allWords)">カードを表示</button>
-    </div>
 
-  <div id="container1">
-    <div id="timeline">
-      <!-- Tweets will be inserted here -->
-    </div>
-  </div>
-  <div id="cardContainer"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-  <script src="script.js"></script>
+    // ... (その他の関数)
+
+    document.getElementById('excelFileInput').addEventListener('change', async function(e){
+        let mergedWordList = [];
+        
+        var files = e.target.files;
+        
+        for (var i = 0; i < files.length; i++) {
+            var reader = new FileReader();
+            await new Promise((resolve, reject) => {
+                reader.readAsArrayBuffer(files[i]);
+
+                reader.onload = function(e) {
+                    var data = new Uint8Array(reader.result);
+                    var workbook = XLSX.read(data, {type: 'array'});
+
+                    var sheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[sheetName];
+
+                    var wordList = XLSX.utils.sheet_to_json(worksheet);
+
+                    mergedWordList = mergedWordList.concat(wordList);
+                    resolve();
+                };
+
+                reader.onerror = function(e) {
+                    console.error("Reading file failed:", e);
+                    reject(e);
+                };
+            });
+        }
+        
+        if (mergedWordList.length > 0) {
+            startTest(mergedWordList);
+        } else {
+            console.warn("No valid data found in the selected files.");
+        }
+    });
+</script>
+
 </body>
 </html>
