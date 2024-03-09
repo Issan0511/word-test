@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  
+  <h1>Word Study</h1>
+  <nav>    
+    <ul>
+        <li><a href="wordlist.html">リスト編集</a></li><li><a href="new-wordlist.html">リスト新規作成</a></li>
+    </ul>
+  </nav>
+      <div class="card" id="card">
+        <div class="container">
+            <div id="wordDisplay">単語</div>
+            <div id="answerDisplay">答え</div>
+        </div>
+      </div>
+    
+    
+    <div id="buttonContainer">
+        <div id="decisionButtons" style="visibility: hidden;">
+            <button onclick="correct()">正解</button>
+            <button onclick="incorrect()">間違い</button>
+        </div>
+        <div id="answerButton">
+            <button onclick="showAnswer()">答えを見る</button>
+        </div>
+    </div>
+    <br>
+    <button id="goBackButton">一つ前の正解</button>
+    <br>
+    <select id="listSelector"></select>
+    <button id="startTestButton">テストを開始</button> 
+    <br>
+    <input type="file" id="excelFileInput" multiple>
+<button id="downloadButton" style="display:none;">結果のダウンロード</button>
+
+
+    <div id="showcardButton" style="display:none;">
+      <button onclick="showcard()">間違え/正解したカードを表示</button>
+    </div>
+
+  <div id="container1">
+    <div id="timeline">
+    
+    </div>
+  </div>
+  <div id="cardContainer"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

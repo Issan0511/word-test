@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>単語リスト作成</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h3>単語リスト作成</h3>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">テスト</a></li><li><a href="wordlist.html">リスト編集</a></li>
+        </ul>
+    </nav>
+    <form id="new-list-form">
+        <input type="text" id="new-list-name-input" placeholder="新しいリスト名" required>
+        <button type="button" id="create-list-button">新しいリストを作成</button>
+    </form>
+    <div id="search-results"></div>
+    <div id="word-entries" class="card2" style="display:none;">
+        <form id="wordlist-form">
+            <div class="input-wrapper">
+                <input type="text" id="word-input" placeholder="単語を入力" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" id="answer-input" placeholder="答えを入力" required>
+            </div>
+            <button type="submit">単語を追加</button>
+        </form>
+    </div>
+    
+    
+    </main>
+    <script src="js/new-wordlist.js"></script>
+</body>
+</html>
